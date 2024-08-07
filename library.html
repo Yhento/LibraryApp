@@ -7,9 +7,52 @@
     <link rel="stylesheet" href="css/library.css">
 </head>
 <body>
+    
     <div class="library-wrapper">
+        <div class="add_button_area">
+            <button class="add_book">Add A Book</button>
+        </div>
       
     </div>
+    <dialog class="add_book_form">
+        <form method="dialog" id="dialogForm">
+            <div>
+                <label for="title">Book Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+
+            <div>
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author">
+            </div>
+
+            <div>
+                <label for="pages">Pages</label>
+                <input type="text" name="pages" id="pages">
+            </div>
+
+            <fieldset>
+                <legend>Have you read this Book yet?</legend>
+
+                <div>
+                    <input type="radio" id="Yes" name="read?" value="Yes">
+                    <label for="Yes">Yes</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="No" name="read?" value="No">
+                    <label for="No">No</label>
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            
+            </fieldset>
+
+
+        </form>
+
+  </dialog>
 </body>
 <script src="js/library.js"></script>
 </html>
