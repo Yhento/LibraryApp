@@ -27,15 +27,18 @@ document.querySelector("dialog form").addEventListener("submit", (e) => {
 
 })
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
 
-Book.prototype.changeReadStatus = function () {
-     this.read == 'No' ? this.read = 'Yes' : this.read = 'No'; 
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    changeReadStatus() {
+        this.read == 'No' ? this.read = 'Yes' : this.read = 'No'; 
+    }
 }
 
 function createElement(tag, className = '', content = '') {
@@ -77,7 +80,7 @@ async function createDeleteButton(url, svg_area, index = '') {
 
 }
 
-async function createReadStatusButton(url, svg_area, readChangeStatus) {
+async function createReadStatusButton(url, svg_area, book) {
 
     const response = await fetch(url);
     const svgText = await response.text();
@@ -92,7 +95,7 @@ async function createReadStatusButton(url, svg_area, readChangeStatus) {
     var read_status_button = svg_area.querySelector('.read_status');
 
     read_status_button.addEventListener('click', () => {
-        readChangeStatus.call(book);
+        book.changeReadStatus();
         clearLibrary();
         displayLibrary();
 
@@ -109,6 +112,7 @@ async function createReadStatusButton(url, svg_area, readChangeStatus) {
 
 function addBookToLibrary(title, author, pages, read) {
     book = new Book(title, author, pages, read);
+    console.table(book);
     myLibrary.push(book);
     clearLibrary();
     add_book_form.querySelector('form').reset();
@@ -145,9 +149,11 @@ function displayLibrary() {
 
         var svg_area = createElement('div', 'svg-area');
 
-        createReadStatusButton('../images/read.svg', svg_area, book.changeReadStatus.bind(book));
+        console.log(book, index);
 
-        createDeleteButton('../images/trash.svg', svg_area, index);
+        createReadStatusButton('./images/read.svg', svg_area, book);
+
+        createDeleteButton('./images/trash.svg', svg_area, index);
 
        
 
